@@ -25,7 +25,7 @@ def detectFace(net, frame, confidence_threshold=0.7):
     return frameOpencvDNN, faceBoxes
 
 # URL repositori GitHub untuk model-model
-base_url = 'https://github.com/risya1411/age-detection/models/'
+base_url = 'https://github.com/username/repo/raw/main/'
 
 # Nama file-model yang akan digunakan
 faceProto = 'opencv_face_detector.pbtxt'
