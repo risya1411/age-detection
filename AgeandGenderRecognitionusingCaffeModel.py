@@ -4,7 +4,11 @@
 import cv2
 import os
 
-os.chdir('C:/Users/risya/age-detection/models')
+# Set path to the models directory in your GitHub repository
+github_models_path = '/path/to/cloned/age-detection/models'
+
+# Change the working directory
+os.chdir(github_models_path)
 
 def detectFace(net, frame, confidence_threshold=0.7):
     frameOpencvDNN = frame.copy()
