@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
 import streamlit as st
-import os
-
-os.chdir('C:/Users/risya/age-detection/models')
 
 def detectFace(net, frame, confidence_threshold=0.7):
     frameOpencvDNN = frame.copy()
@@ -24,12 +21,12 @@ def detectFace(net, frame, confidence_threshold=0.7):
             cv2.rectangle(frameOpencvDNN, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
     return frameOpencvDNN, faceBoxes
 
-faceProto = 'opencv_face_detector.pbtxt'
-faceModel = 'opencv_face_detector_uint8.pb'
-ageProto = 'age_deploy.prototxt'
-ageModel = 'age_net.caffemodel'
-genderProto = 'gender_deploy.prototxt'
-genderModel = 'gender_net.caffemodel'
+faceProto = 'models/opencv_face_detector.pbtxt'
+faceModel = 'models/opencv_face_detector_uint8.pb'
+ageProto = 'models/age_deploy.prototxt'
+ageModel = 'models/age_net.caffemodel'
+genderProto = 'models/gender_deploy.prototxt'
+genderModel = 'models/gender_net.caffemodel'
 
 genderList = ['Male', 'Female']
 ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
