@@ -5,7 +5,6 @@ os.chdir('C:/Users/risya/age-detection/models')
 
 def detectFace(net, frame, confidence_threshold=0.7):
     frameOpencvDNN = frame.copy()
-    print(frameOpencvDNN.shape)
     frameHeight = frameOpencvDNN.shape[0]
     frameWidth = frameOpencvDNN.shape[1]
     blob = cv2.dnn.blobFromImage(frameOpencvDNN, 1.0, (227, 227), [124.96, 115.97, 106.13], swapRB=True, crop=False)
@@ -57,14 +56,19 @@ while True:
         face = frame[max(0, faceBox[1] - padding):min(faceBox[3] + padding, frame.shape[0] - 1),
                      max(0, faceBox[0] - padding):min(faceBox[2] + padding, frame.shape[1] - 1)]
         blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), [124.96, 115.97, 106.13], swapRB=True, crop=False)
+        
         genderNet.setInput(blob)
         genderPreds = genderNet.forward()
         gender = genderList[genderPreds[0].argmax()]
-
+        genderConfidence = genderPreds[0].max()
+        
         ageNet.setInput(blob)
         agePreds = ageNet.forward()
         age = ageList[agePreds[0].argmax()]
-        cv2.putText(resultImg, f'{gender}, {age}', (faceBox[0], faceBox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8,
+        ageConfidence = agePreds[0].max()
+
+        label = f'{gender}, {age} ({genderConfidence*100:.1f}%, {ageConfidence*100:.1f}%)'
+        cv2.putText(resultImg, label, (faceBox[0], faceBox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                     (0, 255, 255), 2, cv2.LINE_AA)
         cv2.imshow("Detecting age and Gender", resultImg)
 
