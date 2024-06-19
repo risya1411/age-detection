@@ -21,8 +21,8 @@ def detectFace(net, frame, confidence_threshold=0.7):
             cv2.rectangle(frameOpencvDNN, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
     return frameOpencvDNN, faceBoxes
 
-faceProto = 'opencv_face_detector.pbtxt'
-faceModel = 'opencv_face_detector_uint8.pb'
+faceProto = 'https://github.com/risya/age-detection/models/opencv_face_detector.pbtxt/'
+faceModel = 'https://github.com/risya/age-detection/models/opencv_face_detector_uint8.pb/'
 ageProto = 'age_deploy.prototxt'
 ageModel = 'age_net.caffemodel'
 genderProto = 'gender_deploy.prototxt'
